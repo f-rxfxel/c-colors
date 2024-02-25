@@ -1,14 +1,14 @@
-"use client";
+"use client"
 
 import { useDichromacy } from "@/hooks/useDichromacy";
 
 export default function Home() {
- 
-  const SelectDaltonism = useDichromacy();
+  const { SelectDaltonism, AccessibleImage } = useDichromacy();
 
   return (
-    <main>
-      <SelectDaltonism />
+    <main className="flex gap-40">
+      <SelectDaltonism text="Accessibility" />
+      <AccessibleImage src="https://picsum.photos/200/300" title="Image"/>
     </main>
   );
 }

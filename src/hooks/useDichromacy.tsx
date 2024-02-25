@@ -1,8 +1,3 @@
-// Based on:
-// https://github.com/cosdensolutions/code/tree/master/videos/long/custom-react-hooks-useLocalStorage
-
-"use client";
-
 import { Button } from "@/components/ui/button";
 import {
   DropdownMenu,
@@ -51,32 +46,53 @@ export const useDichromacy = () => {
     setGlobalColorblind(e);
   };
 
-  const SelectDaltonism = () => (
+  const SelectDaltonism = ({ text }: { text: string }) => (
     <DropdownMenu>
-    <DropdownMenuTrigger asChild>
-      <Button variant="outline" className="flex items-center gap-3">
-        texrte
-      </Button>
-    </DropdownMenuTrigger>
-    <DropdownMenuContent className="w-56">
-      <DropdownMenuLabel>Daltonism</DropdownMenuLabel>
-      <DropdownMenuSeparator />
-      <DropdownMenuRadioGroup
-        value={colorblind}
-        onValueChange={handleChange}
-      >
-        {deficiencies.map((deficiency) => (
-          <DropdownMenuRadioItem key={deficiency} value={deficiency}>
-            {deficiency}
-          </DropdownMenuRadioItem>
-        ))}
-      </DropdownMenuRadioGroup>
-    </DropdownMenuContent>
-  </DropdownMenu>)
+      <DropdownMenuTrigger asChild>
+        <Button variant="outline" className="flex items-center gap-3">
+          {text}
+        </Button>
+      </DropdownMenuTrigger>
+      <DropdownMenuContent className="w-56">
+        <DropdownMenuLabel>Daltonism</DropdownMenuLabel>
+        <DropdownMenuSeparator />
+        <DropdownMenuRadioGroup value={colorblind} onValueChange={handleChange}>
+          {deficiencies.map((deficiency) => (
+            <DropdownMenuRadioItem key={deficiency} value={deficiency}>
+              {deficiency}
+            </DropdownMenuRadioItem>
+          ))}
+        </DropdownMenuRadioGroup>
+      </DropdownMenuContent>
+    </DropdownMenu>
+  );
 
-  const AccessibleImage = () => (
-    <Image src={""} alt="imagem" width={100} height={100} />
-  )
+  const AccessibleImage = ({
+    src,
+    title,
+    className,
+  }: {
+    src: string;
+    title: string;
+    className?: string;
+  }) => (
+    <Image
+    width={200}
+    height={300}
+      src={src}
+      alt={title}
+      className={`
+        ${colorblind === "None" ? "" : ""}
+        ${colorblind === "Protanopia" ? "hue-rotate-90" : ""}
+        ${colorblind === "Protanomaly" ? "hue-rotate-90" : ""}
+        ${colorblind === "Deuteranopia" ? "grayscale" : ""}
+        ${colorblind === "Deuteranomaly" ? "grayscale" : ""}
+        ${colorblind === "Tritanopia" ? "invert" : ""}
+        ${colorblind === "Tritanomaly" ? "invert" : ""}
+        ${className ?? ""}
+`}
+    />
+  );
 
-  return SelectDaltonism;
+  return { SelectDaltonism, AccessibleImage };
 };
