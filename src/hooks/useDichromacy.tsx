@@ -29,6 +29,27 @@ export const useDichromacy = () => {
     }
   };
 
+  const AccessibilityIcon = () => {
+    return (
+      <svg
+        xmlns='http://www.w3.org/2000/svg'
+        width='18'
+        height='18'
+        viewBox='0 0 24 24'
+        fill='none'
+        stroke='currentColor'
+        strokeWidth='2'
+        strokeLinecap='round'
+        strokeLinejoin='round'
+        className='mr-3'
+      >
+        <path d='M2 12s3-7 10-7 10 7 10 7-3 7-10 7-10-7-10-7Z' />
+        <circle cx='12' cy='12' r='3' />
+      </svg>
+    );
+  }
+  
+
   const deficiencies = [
     "None",
     "Protanopia",
@@ -46,10 +67,10 @@ export const useDichromacy = () => {
     setGlobalColorblind(e);
   };
 
-  const SelectDaltonism = ({ text }: { text: string }) => (
+  const SelectDaltonism = ({ text, icon }: { text: string, icon?: React.ReactNode }) => (
     <DropdownMenu>
       <DropdownMenuTrigger asChild>
-        <Button variant="outline" className="flex items-center gap-3">
+        <Button variant="outline" className="flex items-center gap-2">
           {text}
         </Button>
       </DropdownMenuTrigger>
